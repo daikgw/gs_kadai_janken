@@ -12,7 +12,7 @@
 
 <body>
 <!-- 残課題として、PC単位でのフォントsizeが調整できていないこと
-クリック数などを用いて制限をする -->
+永久ループ処理みたいになったところをどうするかは検討の価値あり -->
 
     <header>
         <h1>じゃんけん</h1>
@@ -53,7 +53,61 @@
             $("#next").off("click");
             $(".me").css("backgroundColor","#bdbdbd");
             $(".aite").css("backgroundColor","#bdbdbd");
-            $("#gu_btn").hover(function(){
+            g();
+            c();
+            p();
+        }
+
+            // 画面表示を定義する
+            function ans(){
+            $("#aite").css("display","flex");
+            $(".me").css("width","10.5vw");
+            $(".me").css("height","10.5vw");
+            $(".aite").css("width","10.5vw");
+            $(".aite").css("height","10.5vw");
+        }
+        function aite_gu(){
+            $("#aite_gu_btn").css("backgroundColor","rgb(238, 163, 188)");
+            $("#aite_gu_btn").css("color","white");
+            $("#aite_gu_btn").css("fontWeight","bold");
+
+            $("#judgement").css("display","block");
+            // サイズ指定方法について知りたい
+            // $("#judgement").css("fontSize","50px");
+        }
+        function aite_par(){
+            $("#aite_par_btn").css("backgroundColor","rgb(238, 163, 188)");
+            $("#aite_par_btn").css("color","white");
+            $("#aite_par_btn").css("fontWeight","bold");
+
+            $("#judgement").css("display","block");
+        }
+        function aite_cho(){
+            $("#aite_cho_btn").css("backgroundColor","rgb(238, 163, 188)");
+            $("#aite_cho_btn").css("color","white");
+            $("#aite_cho_btn").css("fontWeight","bold");
+
+            $("#judgement").css("display","block");
+        }
+    
+    //ホバーオフにする記載
+        function hover_off(){
+            $("#gu_btn").off('mouseenter mouseleave');
+            $("#par_btn").off('mouseenter mouseleave');
+            $("#cho_btn").off('mouseenter mouseleave');
+        }
+
+    // リセット処理について記載
+        function reset(){
+            init();
+            win = 0;
+            lose = 0;
+            draw = 0;
+            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+        }
+    // レイアウト調整（最終調整）
+        function g(){
+        $("#gu_btn").hover(function(){
                     // over
                     $("#gu_btn").css("backgroundColor","#0066CC");
                     $("#gu_btn").css("color","white");
@@ -63,7 +117,9 @@
                     $("#gu_btn").css("color","black");
                 }
             );
-            $("#cho_btn").hover(function(){
+        }
+        function c(){
+        $("#cho_btn").hover(function(){
                     // over
                     $("#cho_btn").css("backgroundColor","#0066CC");
                     $("#cho_btn").css("color","white");
@@ -73,7 +129,9 @@
                     $("#cho_btn").css("color","black");
                 }
             );
-            $("#par_btn").hover(function(){
+        }
+        function p(){
+        $("#par_btn").hover(function(){
                     // over
                     $("#par_btn").css("backgroundColor","#0066CC");
                     $("#par_btn").css("color","white");
@@ -84,61 +142,13 @@
                 }
             );
         }
+        
+        // 初期設定 
         init()
-
-        // 相手の手と勝敗を記載
         let result = "";
         let win = 0;
         let lose = 0;
         let draw = 0;
-
-        // 画面表示を定義する
-        function ans(){
-                $("#aite").css("display","flex");
-                $(".me").css("width","10.5vw");
-                $(".me").css("height","10.5vw");
-                $(".aite").css("width","10.5vw");
-                $(".aite").css("height","10.5vw");
-            }
-            function aite_gu(){
-                $("#aite_gu_btn").css("backgroundColor","rgb(238, 163, 188)");
-                $("#aite_gu_btn").css("color","white");
-                $("#aite_gu_btn").css("fontWeight","bold");
-
-                $("#judgement").css("display","block");
-                // サイズ指定方法について知りたい
-                // $("#judgement").css("fontSize","50px");
-            }
-            function aite_par(){
-                $("#aite_par_btn").css("backgroundColor","rgb(238, 163, 188)");
-                $("#aite_par_btn").css("color","white");
-                $("#aite_par_btn").css("fontWeight","bold");
-
-                $("#judgement").css("display","block");
-            }
-            function aite_cho(){
-                $("#aite_cho_btn").css("backgroundColor","rgb(238, 163, 188)");
-                $("#aite_cho_btn").css("color","white");
-                $("#aite_cho_btn").css("fontWeight","bold");
-
-                $("#judgement").css("display","block");
-            }
-        
-        // 
-            function hover_off(){
-                $("#gu_btn").off('mouseenter mouseleave');
-                $("#par_btn").off('mouseenter mouseleave');
-                $("#cho_btn").off('mouseenter mouseleave');
-            }
-
-        // リセット処理について記載
-            function reset(){
-                init();
-                win = 0;
-                lose = 0;
-                draw = 0;
-                $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
-            }
 
         // グーに関する記載
          $("#gu_btn").on("click",function(){
@@ -172,8 +182,6 @@
             $("#next").html("Next");
 
             $("#next").on("click",function(){
-                $("#par_btn").on("click");
-                $("#cho_btn").on("click");
                 init();
                 $("#reset").css("display","block");
                 $("#save").css("display","block");
@@ -186,10 +194,66 @@
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                 }
+                $("#par_btn").on("click");
+                $("#par_btn").on("click",function(){
+                    $("#reset").css("display","none");
+                    $("#save").css("display","none");
+                    $("#par_btn").css("backgroundColor","#0066CC");
+                    hover_off();
+                    $("#gu_btn").off("click");
+                    $("#cho_btn").off("click");
+                    $("#next").on("click");
+
+                    const r = Math.ceil(Math.random()*3);
+                    if(r==1){
+                        ans();
+                        aite_gu();
+                        result = "勝ち";
+                        win ++;
+                    }else if(r==2){
+                        ans();
+                        aite_par();
+                        result = "引き分け";
+                        draw ++;
+                    }else{
+                        ans();
+                        aite_cho();
+                        result = "負け";
+                        lose ++;
+                    }
+                });
+                $("#cho_btn").on("click");
+                $("#cho_btn").on("click",function(){
+                    $("#reset").css("display","none");
+                    $("#save").css("display","none");
+                    $("#cho_btn").css("backgroundColor","#0066CC");
+                    hover_off();
+                    $("#par_btn").off("click");
+                    $("#gu_btn").off("click");
+                    $("#next").on("click");
+
+                    const r = Math.ceil(Math.random()*3);
+                    if(r==1){
+                        ans();
+                        aite_gu();
+                        result = "負け";
+                        lose ++;
+                    }else if(r==2){
+                        ans();
+                        aite_par();
+                        result = "勝ち";
+                        win ++;
+                    }else{
+                        ans();
+                        aite_cho();
+                        result = "引き分け";
+                        draw ++;
+                    }
+                });
             });
             // resetボタンの記載
-            $("#reset").on("click",function(){
-                reset();
+                $("#reset").on("click",function(){
+                    reset();
             });
         });
 
@@ -225,8 +289,6 @@
             $("#next").html("Next");
 
             $("#next").on("click",function(){
-                $("#gu_btn").on("click");
-                $("#cho_btn").on("click");
                 init();
                 $("#reset").css("display","block");
                 $("#save").css("display","block");
@@ -239,6 +301,62 @@
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                 }
+                $("#gu_btn").on("click");
+                $("#gu_btn").on("click",function(){
+                    $("#reset").css("display","none");
+                    $("#save").css("display","none");
+                    $("#gu_btn").css("backgroundColor","#0066CC");
+                    hover_off();
+                    $("#par_btn").off("click");
+                    $("#cho_btn").off("click");
+                    $("#next").on("click");
+
+                    const r = Math.ceil(Math.random()*3);
+                    if(r==1){
+                        ans();
+                        aite_gu();
+                        result = "引き分け";
+                        draw ++;
+                    }else if(r==2){
+                        ans();
+                        aite_par();
+                        result = "負け";
+                        lose ++;
+                    }else{
+                        ans();
+                        aite_cho();
+                        result = "勝ち";
+                        win ++;
+                    }
+                });
+                $("#cho_btn").on("click");
+                $("#cho_btn").on("click",function(){
+                    $("#reset").css("display","none");
+                    $("#save").css("display","none");
+                    $("#cho_btn").css("backgroundColor","#0066CC");
+                    hover_off();
+                    $("#par_btn").off("click");
+                    $("#gu_btn").off("click");
+                    $("#next").on("click");
+
+                    const r = Math.ceil(Math.random()*3);
+                    if(r==1){
+                        ans();
+                        aite_gu();
+                        result = "負け";
+                        lose ++;
+                    }else if(r==2){
+                        ans();
+                        aite_par();
+                        result = "勝ち";
+                        win ++;
+                    }else{
+                        ans();
+                        aite_cho();
+                        result = "引き分け";
+                        draw ++;
+                    }
+                });
             });
             $("#reset").on("click",function(){
                 reset();
@@ -277,8 +395,6 @@
             $("#next").html("Next");
 
             $("#next").on("click",function(){
-                $("#par_btn").on("click");
-                $("#gu_btn").on("click");
                 init();
                 $("#reset").css("display","block");
                 $("#save").css("display","block");
@@ -291,10 +407,65 @@
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                 }
+                $("#par_btn").on("click");
+                $("#par_btn").on("click",function(){
+                    $("#reset").css("display","none");
+                    $("#save").css("display","none");
+                    $("#par_btn").css("backgroundColor","#0066CC");
+                    hover_off();
+                    $("#gu_btn").off("click");
+                    $("#cho_btn").off("click");
+                    $("#next").on("click");
+
+                    const r = Math.ceil(Math.random()*3);
+                    if(r==1){
+                        ans();
+                        aite_gu();
+                        result = "勝ち";
+                        win ++;
+                    }else if(r==2){
+                        ans();
+                        aite_par();
+                        result = "引き分け";
+                        draw ++;
+                    }else{
+                        ans();
+                        aite_cho();
+                        result = "負け";
+                        lose ++;
+                    }
+                });
+                $("#gu_btn").on("click");
+                $("#gu_btn").on("click",function(){
+                    $("#reset").css("display","none");
+                    $("#save").css("display","none");
+                    $("#gu_btn").css("backgroundColor","#0066CC");
+                    hover_off();
+                    $("#par_btn").off("click");
+                    $("#cho_btn").off("click");
+                    $("#next").on("click");
+
+                    const r = Math.ceil(Math.random()*3);
+                    if(r==1){
+                        ans();
+                        aite_gu();
+                        result = "引き分け";
+                        draw ++;
+                    }else if(r==2){
+                        ans();
+                        aite_par();
+                        result = "負け";
+                        lose ++;
+                    }else{
+                        ans();
+                        aite_cho();
+                        result = "勝ち";
+                        win ++;
+                    }
+                });
             });
             $("#reset").on("click",function(){
-                reset();
-                
+                reset(); 
             });
         });
         
