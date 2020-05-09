@@ -12,7 +12,6 @@
 
 <body>
 <!-- 残課題として、PC単位でのフォントsizeが調整できていないこと
-各ボタンの制限が甘いこと性善説で成り立っているので、分岐処理を細かくすること
 クリック数などを用いて制限をする -->
 
     <header>
@@ -50,7 +49,8 @@
             $(".me").css("height","22.5vw");
             $(".aite").css("color","black");
             $("#judgement").css("display","none");
-            $("#next").html("footer@janken.co.jp");
+            $("#next").html("footer@janken.co.jp")
+            $("#next").off("click");
             $(".me").css("backgroundColor","#bdbdbd");
             $(".aite").css("backgroundColor","#bdbdbd");
             $("#gu_btn").hover(function(){
@@ -146,6 +146,9 @@
             $("#save").css("display","none");
             $("#gu_btn").css("backgroundColor","#0066CC");
             hover_off();
+            $("#par_btn").off("click");
+            $("#cho_btn").off("click");
+            $("#next").on("click");
 
             const r = Math.ceil(Math.random()*3);
             if(r==1){
@@ -169,6 +172,8 @@
             $("#next").html("Next");
 
             $("#next").on("click",function(){
+                $("#par_btn").on("click");
+                $("#cho_btn").on("click");
                 init();
                 $("#reset").css("display","block");
                 $("#save").css("display","block");
@@ -194,6 +199,9 @@
             $("#save").css("display","none");
             $("#par_btn").css("backgroundColor","#0066CC");
             hover_off();
+            $("#gu_btn").off("click");
+            $("#cho_btn").off("click");
+            $("#next").on("click");
 
             const r = Math.ceil(Math.random()*3);
             if(r==1){
@@ -217,6 +225,8 @@
             $("#next").html("Next");
 
             $("#next").on("click",function(){
+                $("#gu_btn").on("click");
+                $("#cho_btn").on("click");
                 init();
                 $("#reset").css("display","block");
                 $("#save").css("display","block");
@@ -241,6 +251,9 @@
             $("#save").css("display","none");
             $("#cho_btn").css("backgroundColor","#0066CC");
             hover_off();
+            $("#par_btn").off("click");
+            $("#gu_btn").off("click");
+            $("#next").on("click");
 
             const r = Math.ceil(Math.random()*3);
             if(r==1){
@@ -264,6 +277,8 @@
             $("#next").html("Next");
 
             $("#next").on("click",function(){
+                $("#par_btn").on("click");
+                $("#gu_btn").on("click");
                 init();
                 $("#reset").css("display","block");
                 $("#save").css("display","block");
