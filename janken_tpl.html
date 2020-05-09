@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/janken.css">
+    <title>じゃんけん</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>じゃんけん</h1>
+        <p id="win_lose"></p>
+    </header>
+
+    <main>
+        <ul id="me">
+            <li class="me" id="gu_btn"><p>グー</p></li>
+            <li class="me" id="cho_btn"><p>チョキ</p></li>
+            <li class="me" id="par_btn"><p>パー</p></li>
+        </ul>
+        <ul id="aite">
+            <li class="aite" id="aite_gu_btn"><p>グー</p></li>
+            <li class="aite" id="aite_cho_btn"><p>チョキ</p></li>
+            <li class="aite" id="aite_par_btn"><p>パー</p></li>
+        </ul>
+        <div id="judgement">勝ち</div>
+    </main>
+
+    <footer id="footer">
+        <div id="save">Save</div>
+        <div id="next">footer@janken.co.jp</div>
+        <div id="reset">Reset</div>        
+    </footer>
+
+    <script>
+        // 初期設定の画面レイアウト
+        function init(){
+            $("#aite").css("display","none");
+            $("#btn_space").css("display","none");
+            $("#reset").css("display","none");
+            $("#save").css("display","none");
+            $(".me").css("width","22.5vw");
+            $(".me").css("height","22.5vw");
+            $("#judgement").css("display","none");
+            $("#next").html("footer@janken.co.jp");
+        }
+        init()
+
+        // 相手の手と勝敗を記載
+        let result = "";
+        let win = 0;
+        let lose = 0;
+        let draw = 0;
+
+        // 画面表示を定義する
+        function ans(){
+                $("#aite").css("display","flex");
+                $(".me").css("width","10.5vw");
+                $(".me").css("height","10.5vw");
+                $(".aite").css("width","10.5vw");
+                $(".aite").css("height","10.5vw");
+            }
+            function aite_gu(){
+                $("#aite_gu_btn").css("backgroundColor","rgb(238, 163, 188)");
+                $("#aite_gu_btn").css("color","white");
+                $("#aite_gu_btn").css("fontWeight","bold");
+
+                $("#judgement").css("display","block");
+                // サイズ指定方法について知りたい
+                // $("#judgement").css("fontSize","50px");
+            }
+            function aite_par(){
+                $("#aite_par_btn").css("backgroundColor","rgb(238, 163, 188)");
+                $("#aite_par_btn").css("color","white");
+                $("#aite_par_btn").css("fontWeight","bold");
+
+                $("#judgement").css("display","block");
+            }
+            function aite_cho(){
+                $("#aite_cho_btn").css("backgroundColor","rgb(238, 163, 188)");
+                $("#aite_cho_btn").css("color","white");
+                $("#aite_cho_btn").css("fontWeight","bold");
+
+                $("#judgement").css("display","block");
+            }
+        
+        // リセット処理について記載
+            function reset(){
+                win = 0;
+                lose = 0;
+                draw = 0;
+                init();
+                $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+            }
+
+        // グーに関する記載
+         $("#gu_btn").on("click",function(){
+            $("#reset").css("display","none");
+            $("#save").css("display","none");
+            const r = Math.ceil(Math.random()*3)
+            $("#gu_btn").css("backgroundColor","#0066CC");
+            
+            if(r==1){
+                ans();
+                aite_gu();
+                result = "引き分け";
+                draw ++;
+            }else if(r==2){
+                ans();
+                aite_par();
+                result = "負け";
+                lose ++;
+            }else{
+                ans();
+                aite_cho();
+                result = "勝ち";
+                win ++;
+            }
+            $("#judgement").html(result);
+            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+            $("#next").html("Next");
+
+            $("#next").on("click",function(){
+                init();
+                $("#reset").css("display","block");
+                $("#save").css("display","block");
+                // したの部分はクラス指定するとhoverが消えるけどなぜ？
+                $("#gu_btn").css("backgroundColor","#bdbdbd");
+                if(r==1){
+                    $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                }else if(r==2){
+                    $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                }else{
+                    $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
+                }
+            });
+            // resetボタンの記載
+            $("#reset").on("click",function(){
+                reset();
+                
+            });
+        });
+
+        // パーに関する記載
+         $("#par_btn").on("click",function(){
+            $("#reset").css("display","none");
+            $("#save").css("display","none");
+            const r = Math.ceil(Math.random()*3)
+            $("#par_btn").css("backgroundColor","#0066CC");
+            
+            if(r==1){
+                ans();
+                aite_gu();
+                result = "勝ち";
+                win ++;
+            }else if(r==2){
+                ans();
+                aite_par();
+                result = "引き分け";
+                draw ++;
+            }else{
+                ans();
+                aite_cho();
+                result = "負け";
+                lose ++;
+            }
+            $("#judgement").html(result);
+            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分")
+            $("#next").html("Next");
+
+            $("#next").on("click",function(){
+                init();
+                $("#reset").css("display","block");
+                $("#save").css("display","block");
+                $("#par_btn").css("backgroundColor","#bdbdbd");
+                if(r==1){
+                    $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                }else if(r==2){
+                    $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                }else{
+                    $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
+                }
+            });
+            $("#reset").on("click",function(){
+                reset();
+            });
+        });
+
+        // チョキ「に関する記載
+         $("#cho_btn").on("click",function(){
+            $("#reset").css("display","none");
+            $("#save").css("display","none");
+            const r = Math.ceil(Math.random()*3);
+            $("#cho_btn").css("backgroundColor","#0066CC");
+            
+            if(r==1){
+                ans();
+                aite_gu();
+                result = "負け";
+                lose ++;
+            }else if(r==2){
+                ans();
+                aite_par();
+                result = "勝ち";
+                win ++;
+            }else{
+                ans();
+                aite_cho();
+                result = "引き分け";
+                draw ++;
+            }
+            $("#judgement").html(result);
+            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+            $("#next").html("Next");
+
+            $("#next").on("click",function(){
+                init();
+                $("#reset").css("display","block");
+                $("#save").css("display","block");
+                $("#cho_btn").css("backgroundColor","#bdbdbd");
+                if(r==1){
+                    $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                }else if(r==2){
+                    $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                }else{
+                    $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
+                }
+            });
+            $("#reset").on("click",function(){
+                reset();
+            });
+        });
+        
+        
+   
+
+
+   
+    </script>
+</body>
+
+</html>
