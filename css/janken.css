@@ -61,18 +61,17 @@ li{
 
     text-align: center;
     list-style-type:none;
-    background-color: #bdbdbd;
+    /* background-color: #bdbdbd; */
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.me:hover{
-    background: #0066CC;
-    color:#fff;
-}
+
 main>div{
     text-align: center;
     padding: 0;
     margin-top: 100px;
 }
+
+/* ,"#cho_btn","#par-btn" */
