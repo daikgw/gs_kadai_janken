@@ -156,8 +156,8 @@
             $("#save").css("display","none");
             $("#gu_btn").css("backgroundColor","#0066CC");
             hover_off();
-            $("#par_btn").off("click");
-            $("#cho_btn").off("click");
+            // $("#par_btn").off("click");
+            // $("#cho_btn").off("click");
             $("#next").on("click");
 
             const r = Math.ceil(Math.random()*3);
@@ -194,66 +194,10 @@
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                 }
-                $("#par_btn").on("click");
-                $("#par_btn").on("click",function(){
-                    $("#reset").css("display","none");
-                    $("#save").css("display","none");
-                    $("#par_btn").css("backgroundColor","#0066CC");
-                    hover_off();
-                    $("#gu_btn").off("click");
-                    $("#cho_btn").off("click");
-                    $("#next").on("click");
-
-                    const r = Math.ceil(Math.random()*3);
-                    if(r==1){
-                        ans();
-                        aite_gu();
-                        result = "勝ち";
-                        win ++;
-                    }else if(r==2){
-                        ans();
-                        aite_par();
-                        result = "引き分け";
-                        draw ++;
-                    }else{
-                        ans();
-                        aite_cho();
-                        result = "負け";
-                        lose ++;
-                    }
-                });
-                $("#cho_btn").on("click");
-                $("#cho_btn").on("click",function(){
-                    $("#reset").css("display","none");
-                    $("#save").css("display","none");
-                    $("#cho_btn").css("backgroundColor","#0066CC");
-                    hover_off();
-                    $("#par_btn").off("click");
-                    $("#gu_btn").off("click");
-                    $("#next").on("click");
-
-                    const r = Math.ceil(Math.random()*3);
-                    if(r==1){
-                        ans();
-                        aite_gu();
-                        result = "負け";
-                        lose ++;
-                    }else if(r==2){
-                        ans();
-                        aite_par();
-                        result = "勝ち";
-                        win ++;
-                    }else{
-                        ans();
-                        aite_cho();
-                        result = "引き分け";
-                        draw ++;
-                    }
-                });
             });
             // resetボタンの記載
-                $("#reset").on("click",function(){
-                    reset();
+            $("#reset").on("click",function(){
+                reset();
             });
         });
 
@@ -263,8 +207,8 @@
             $("#save").css("display","none");
             $("#par_btn").css("backgroundColor","#0066CC");
             hover_off();
-            $("#gu_btn").off("click");
-            $("#cho_btn").off("click");
+            // $("#gu_btn").off("click");
+            // $("#cho_btn").off("click");
             $("#next").on("click");
 
             const r = Math.ceil(Math.random()*3);
@@ -301,62 +245,6 @@
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                 }
-                $("#gu_btn").on("click");
-                $("#gu_btn").on("click",function(){
-                    $("#reset").css("display","none");
-                    $("#save").css("display","none");
-                    $("#gu_btn").css("backgroundColor","#0066CC");
-                    hover_off();
-                    $("#par_btn").off("click");
-                    $("#cho_btn").off("click");
-                    $("#next").on("click");
-
-                    const r = Math.ceil(Math.random()*3);
-                    if(r==1){
-                        ans();
-                        aite_gu();
-                        result = "引き分け";
-                        draw ++;
-                    }else if(r==2){
-                        ans();
-                        aite_par();
-                        result = "負け";
-                        lose ++;
-                    }else{
-                        ans();
-                        aite_cho();
-                        result = "勝ち";
-                        win ++;
-                    }
-                });
-                $("#cho_btn").on("click");
-                $("#cho_btn").on("click",function(){
-                    $("#reset").css("display","none");
-                    $("#save").css("display","none");
-                    $("#cho_btn").css("backgroundColor","#0066CC");
-                    hover_off();
-                    $("#par_btn").off("click");
-                    $("#gu_btn").off("click");
-                    $("#next").on("click");
-
-                    const r = Math.ceil(Math.random()*3);
-                    if(r==1){
-                        ans();
-                        aite_gu();
-                        result = "負け";
-                        lose ++;
-                    }else if(r==2){
-                        ans();
-                        aite_par();
-                        result = "勝ち";
-                        win ++;
-                    }else{
-                        ans();
-                        aite_cho();
-                        result = "引き分け";
-                        draw ++;
-                    }
-                });
             });
             $("#reset").on("click",function(){
                 reset();
@@ -369,8 +257,8 @@
             $("#save").css("display","none");
             $("#cho_btn").css("backgroundColor","#0066CC");
             hover_off();
-            $("#par_btn").off("click");
-            $("#gu_btn").off("click");
+            // $("#par_btn").off("click");
+            // $("#gu_btn").off("click");
             $("#next").on("click");
 
             const r = Math.ceil(Math.random()*3);
@@ -407,72 +295,25 @@
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                 }
-                $("#par_btn").on("click");
-                $("#par_btn").on("click",function(){
-                    $("#reset").css("display","none");
-                    $("#save").css("display","none");
-                    $("#par_btn").css("backgroundColor","#0066CC");
-                    hover_off();
-                    $("#gu_btn").off("click");
-                    $("#cho_btn").off("click");
-                    $("#next").on("click");
-
-                    const r = Math.ceil(Math.random()*3);
-                    if(r==1){
-                        ans();
-                        aite_gu();
-                        result = "勝ち";
-                        win ++;
-                    }else if(r==2){
-                        ans();
-                        aite_par();
-                        result = "引き分け";
-                        draw ++;
-                    }else{
-                        ans();
-                        aite_cho();
-                        result = "負け";
-                        lose ++;
-                    }
-                });
-                $("#gu_btn").on("click");
-                $("#gu_btn").on("click",function(){
-                    $("#reset").css("display","none");
-                    $("#save").css("display","none");
-                    $("#gu_btn").css("backgroundColor","#0066CC");
-                    hover_off();
-                    $("#par_btn").off("click");
-                    $("#cho_btn").off("click");
-                    $("#next").on("click");
-
-                    const r = Math.ceil(Math.random()*3);
-                    if(r==1){
-                        ans();
-                        aite_gu();
-                        result = "引き分け";
-                        draw ++;
-                    }else if(r==2){
-                        ans();
-                        aite_par();
-                        result = "負け";
-                        lose ++;
-                    }else{
-                        ans();
-                        aite_cho();
-                        result = "勝ち";
-                        win ++;
-                    }
-                });
             });
             $("#reset").on("click",function(){
                 reset(); 
             });
         });
-        
-        
-   
 
+        $("#save").on("click",function(){
+                let value = {
+                    "win" : win,
+                    "lose" : lose,
+                    "draw" : draw
+                };
+                let v = JSON.stringify(value);
+                console.log(v);
+                localStorage.setItem("victory",v);
+                alert("saveしました");
+        });
 
+        
    
     </script>
 </body>
