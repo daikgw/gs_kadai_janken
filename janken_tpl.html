@@ -20,16 +20,18 @@
     </header>
 
     <main>
-        <ul id="me">
-            <li class="me" id="gu_btn"><p>グー</p></li>
-            <li class="me" id="cho_btn"><p>チョキ</p></li>
-            <li class="me" id="par_btn"><p>パー</p></li>
-        </ul>
-        <ul id="aite">
-            <li class="aite" id="aite_gu_btn"><p>グー</p></li>
-            <li class="aite" id="aite_cho_btn"><p>チョキ</p></li>
-            <li class="aite" id="aite_par_btn"><p>パー</p></li>
-        </ul>
+        <div id="field">
+            <ul id="me">
+                <li class="me" id="gu_btn"><p>グー</p></li>
+                <li class="me" id="cho_btn"><p>チョキ</p></li>
+                <li class="me" id="par_btn"><p>パー</p></li>
+            </ul>
+            <ul id="aite">
+                <li class="aite" id="aite_gu_btn"><p>グー</p></li>
+                <li class="aite" id="aite_cho_btn"><p>チョキ</p></li>
+                <li class="aite" id="aite_par_btn"><p>パー</p></li>
+            </ul>
+        </div>
         <div id="judgement">勝ち</div>
     </main>
 
@@ -42,11 +44,16 @@
     <script>
         // 初期設定の画面レイアウト
         function init(){
+            // $("#gu_btn").css("display","block");
+            // $("#par_btn").css("display","block");
+            // $("#cho_btn").css("display","block");
             $("#aite").css("display","none");
             $("#reset").css("display","none");
             $("#save").css("display","none");
             $(".me").css("width","22.5vw");
             $(".me").css("height","22.5vw");
+            $(".aite").css("width","22.5vw");
+            $(".aite").css("height","22.5vw");
             $(".aite").css("color","black");
             $("#judgement").css("display","none");
             $("#next").html("footer@janken.co.jp")
@@ -58,27 +65,30 @@
             p();
         }
 
-            // 画面表示を定義する
-            function ans(){
+         // 画面表示を定義する
+        function ans(){
+            $("#field").css("display","flex");
             $("#aite").css("display","flex");
-            $(".me").css("width","10.5vw");
-            $(".me").css("height","10.5vw");
-            $(".aite").css("width","10.5vw");
-            $(".aite").css("height","10.5vw");
         }
         function aite_gu(){
             $("#aite_gu_btn").css("backgroundColor","rgb(238, 163, 188)");
             $("#aite_gu_btn").css("color","white");
             $("#aite_gu_btn").css("fontWeight","bold");
+            // 検証記述
+            $("#aite_par_btn").css("display","none");
+            $("#aite_cho_btn").css("display","none");
 
             $("#judgement").css("display","block");
             // サイズ指定方法について知りたい
-            // $("#judgement").css("fontSize","50px");
+            // $("#judgement").css("fontSize","50");
         }
         function aite_par(){
             $("#aite_par_btn").css("backgroundColor","rgb(238, 163, 188)");
             $("#aite_par_btn").css("color","white");
             $("#aite_par_btn").css("fontWeight","bold");
+            // 検証記述
+            $("#aite_gu_btn").css("display","none");
+            $("#aite_cho_btn").css("display","none");
 
             $("#judgement").css("display","block");
         }
@@ -86,6 +96,9 @@
             $("#aite_cho_btn").css("backgroundColor","rgb(238, 163, 188)");
             $("#aite_cho_btn").css("color","white");
             $("#aite_cho_btn").css("fontWeight","bold");
+            // 検証記述
+            $("#aite_par_btn").css("display","none");
+            $("#aite_gu_btn").css("display","none");
 
             $("#judgement").css("display","block");
         }
@@ -151,13 +164,16 @@
         let draw = 0;
 
         // グーに関する記載
-         $("#gu_btn").on("click",function(){
+        let a = 
+            $("#gu_btn").on("click",function(){
             $("#reset").css("display","none");
             $("#save").css("display","none");
             $("#gu_btn").css("backgroundColor","#0066CC");
+            $("#par_btn").css("display","none");
+            $("#cho_btn").css("display","none");
             hover_off();
-            // $("#par_btn").off("click");
-            // $("#cho_btn").off("click");
+            // 検証用
+            // $("#gu_btn").off("click");
             $("#next").on("click");
 
             const r = Math.ceil(Math.random()*3);
@@ -193,7 +209,11 @@
                     $("#aite_par_btn").css("backgroundColor","#bdbdbd");
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
-                }
+                };
+                $("#par_btn").css("display","block");
+                $("#cho_btn").css("display","block");
+                $("li").css("display","flex");
+                $("li").css("text-align","center");
             });
             // resetボタンの記載
             $("#reset").on("click",function(){
@@ -206,6 +226,8 @@
             $("#reset").css("display","none");
             $("#save").css("display","none");
             $("#par_btn").css("backgroundColor","#0066CC");
+            $("#gu_btn").css("display","none");
+            $("#cho_btn").css("display","none");
             hover_off();
             // $("#gu_btn").off("click");
             // $("#cho_btn").off("click");
@@ -245,6 +267,10 @@
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                 }
+                $("#par_btn").css("display","block");
+                $("#gu_btn").css("display","block");
+                $("li").css("display","flex");
+                $("li").css("text-align","center");
             });
             $("#reset").on("click",function(){
                 reset();
@@ -256,6 +282,8 @@
             $("#reset").css("display","none");
             $("#save").css("display","none");
             $("#cho_btn").css("backgroundColor","#0066CC");
+            $("#par_btn").css("display","none");
+            $("#gu_btn").css("display","none");
             hover_off();
             // $("#par_btn").off("click");
             // $("#gu_btn").off("click");
@@ -295,6 +323,10 @@
                 }else{
                     $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                 }
+                $("#gu_btn").css("display","block");
+                $("#cho_btn").css("display","block");
+                $("li").css("display","flex");
+                $("li").css("text-align","center");
             });
             $("#reset").on("click",function(){
                 reset(); 
