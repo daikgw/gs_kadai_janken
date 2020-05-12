@@ -44,6 +44,7 @@
         let win = 0;
         let lose = 0;
         let draw = 0;
+        let click =0;
 
         // 結果画面におけるレイアウト
         function ans(){
@@ -137,6 +138,7 @@
             g();
             c();
             p();
+            click = 0;
         }
         // リセット処理について記載
         function reset(){
@@ -150,188 +152,199 @@
         init()
         // グーに関する記載
         $("#gu_btn").on("click",function(){
-            $("#gu_btn").css("backgroundColor","#0066CC");
-            $("#par_btn").css("display","none");
-            $("#cho_btn").css("display","none");
-            hover_off();
-            const r = Math.ceil(Math.random()*3);
-            if(r==1){
-                ans();
-                aite_gu();
-                result = "引き分け";
-                draw ++;
-            }else if(r==2){
-                ans();
-                aite_par();
-                result = "負け";
-                lose ++;
-            }else{
-                ans();
-                aite_cho();
-                result = "勝ち";
-                win ++;
-            }
-            $("#judgement").html(result);
-            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
-            $("#next").on("click",function(){
-                init();
-                $("#reset").css("display","block");
-                $("#save").css("display","block");
-                $("#gu_btn").css("backgroundColor","#bdbdbd");
-                $("#gu_btn").css("color","black");
+            click ++; 
+            if (click==1){
+                $("#gu_btn").css("backgroundColor","#0066CC");
+                $("#par_btn").css("display","none");
+                $("#cho_btn").css("display","none");
+                hover_off();
+                const r = Math.ceil(Math.random()*3);
                 if(r==1){
-                    $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                    ans();
+                    aite_gu();
+                    result = "引き分け";
+                    draw ++;
                 }else if(r==2){
-                    $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                    ans();
+                    aite_par();
+                    result = "負け";
+                    lose ++;
                 }else{
-                    $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
-                };
-                $("#par_btn").css("display","block");
-                $("#cho_btn").css("display","block");
-                $("li").css("display","flex");
-                $("li").css("text-align","center");
-                $("#footer").html('<div class="btn" id="save">Save</div>');
-                $("#footer").append('<div class="btn" id="reset">Reset</div>');
-                $("#reset").on("click",function(){
-                    reset();
-                });
-                $("#save").on("click",function(){
-                    let value = {
-                        "win" : win,
-                        "lose" : lose,
-                        "draw" : draw
+                    ans();
+                    aite_cho();
+                    result = "勝ち";
+                    win ++;
+                }
+                $("#judgement").html(result);
+                $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+                $("#next").on("click",function(){
+                    init();
+                    $("#reset").css("display","block");
+                    $("#save").css("display","block");
+                    $("#gu_btn").css("backgroundColor","#bdbdbd");
+                    $("#gu_btn").css("color","black");
+                    if(r==1){
+                        $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                    }else if(r==2){
+                        $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                    }else{
+                        $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
                     };
-                    let v = JSON.stringify(value);
-                    console.log(v);
-                    localStorage.setItem("victory",v);
-                    alert("保存しました");
+                    $("#par_btn").css("display","block");
+                    $("#cho_btn").css("display","block");
+                    $("li").css("display","flex");
+                    $("li").css("text-align","center");
+                    $("#footer").html('<div class="btn" id="save">Save</div>');
+                    $("#footer").append('<div class="btn" id="reset">Reset</div>');
+                    $("#reset").on("click",function(){
+                        reset();
+                    });
+                    $("#save").on("click",function(){
+                        let value = {
+                            "win" : win,
+                            "lose" : lose,
+                            "draw" : draw
+                        };
+                        let v = JSON.stringify(value);
+                        console.log(v);
+                        localStorage.setItem("victory",v);
+                        alert("保存しました");
+                    });
                 });
-            });
+            }
         });
         // パーに関する記載
          $("#par_btn").on("click",function(){
-            $("#reset").css("display","none");
-            $("#save").css("display","none");
-            $("#par_btn").css("backgroundColor","#0066CC");
-            $("#gu_btn").css("display","none");
-            $("#cho_btn").css("display","none");
-            hover_off();
-            const r = Math.ceil(Math.random()*3);
-            if(r==1){
-                ans();
-                aite_gu();
-                result = "勝ち";
-                win ++;
-            }else if(r==2){
-                ans();
-                aite_par();
-                result = "引き分け";
-                draw ++;
-            }else{
-                ans();
-                aite_cho();
-                result = "負け";
-                lose ++;
-            }
-            $("#judgement").html(result);
-            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分")
-            $("#next").on("click",function(){
-                init();
-                $("#reset").css("display","block");
-                $("#save").css("display","block");
-                $("#par_btn").css("backgroundColor","#bdbdbd");
-                $("#par_btn").css("color","black");
+            click ++; 
+            if (click==1){
+                $("#reset").css("display","none");
+                $("#save").css("display","none");
+                $("#par_btn").css("backgroundColor","#0066CC");
+                $("#gu_btn").css("display","none");
+                $("#cho_btn").css("display","none");
+                hover_off();
+                const r = Math.ceil(Math.random()*3);
                 if(r==1){
-                    $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                    ans();
+                    aite_gu();
+                    result = "勝ち";
+                    win ++;
                 }else if(r==2){
-                    $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                    ans();
+                    aite_par();
+                    result = "引き分け";
+                    draw ++;
                 }else{
-                    $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
+                    ans();
+                    aite_cho();
+                    result = "負け";
+                    lose ++;
                 }
-                $("#par_btn").css("display","block");
-                $("#gu_btn").css("display","block");
-                $("li").css("display","flex");
-                $("li").css("text-align","center");
-                $("#footer").html('<div class="btn" id="save">Save</div>');
-                $("#footer").append('<div class="btn" id="reset">Reset</div>');
-                $("#reset").on("click",function(){
-                    reset();
+                $("#judgement").html(result);
+                $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分")
+                $("#next").on("click",function(){
+                    init();
+                    $("#reset").css("display","block");
+                    $("#save").css("display","block");
+                    $("#par_btn").css("backgroundColor","#bdbdbd");
+                    $("#par_btn").css("color","black");
+                    if(r==1){
+                        $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                    }else if(r==2){
+                        $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                    }else{
+                        $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
+                    }
+                    $("#par_btn").css("display","block");
+                    $("#gu_btn").css("display","block");
+                    $("li").css("display","flex");
+                    $("li").css("text-align","center");
+                    $("#footer").html('<div class="btn" id="save">Save</div>');
+                    $("#footer").append('<div class="btn" id="reset">Reset</div>');
+                    $("#reset").on("click",function(){
+                        reset();
+                    });
+                    $("#save").on("click",function(){
+                        let value = {
+                            "win" : win,
+                            "lose" : lose,
+                            "draw" : draw
+                        };
+                        let v = JSON.stringify(value);
+                        console.log(v);
+                        localStorage.setItem("victory",v);
+                        alert("保存しました");
+                    });
                 });
-                $("#save").on("click",function(){
-                    let value = {
-                        "win" : win,
-                        "lose" : lose,
-                        "draw" : draw
-                    };
-                    let v = JSON.stringify(value);
-                    console.log(v);
-                    localStorage.setItem("victory",v);
-                    alert("保存しました");
-                });
-            });
+            }
         });
 
         // チョキ「に関する記載
          $("#cho_btn").on("click",function(){
-            $("#reset").css("display","none");
-            $("#save").css("display","none");
-            $("#cho_btn").css("backgroundColor","#0066CC");
-            $("#par_btn").css("display","none");
-            $("#gu_btn").css("display","none");
-            hover_off();
-            const r = Math.ceil(Math.random()*3);
-            if(r==1){
-                ans();
-                aite_gu();
-                result = "負け";
-                lose ++;
-            }else if(r==2){
-                ans();
-                aite_par();
-                result = "勝ち";
-                win ++;
-            }else{
-                ans();
-                aite_cho();
-                result = "引き分け";
-                draw ++;
-            }
-            $("#judgement").html(result);
-            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
-            $("#next").on("click",function(){
-                init();
-                $("#reset").css("display","block");
-                $("#save").css("display","block");
-                $("#cho_btn").css("backgroundColor","#bdbdbd");
-                $("#cho_btn").css("color","black");
+            click ++; 
+            if (click==1){
+                $("#reset").css("display","none");
+                $("#save").css("display","none");
+                $("#cho_btn").css("backgroundColor","#0066CC");
+                $("#par_btn").css("display","none");
+                $("#gu_btn").css("display","none");
+                hover_off();
+                const r = Math.ceil(Math.random()*3);
                 if(r==1){
-                    $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                    ans();
+                    aite_gu();
+                    result = "負け";
+                    lose ++;
                 }else if(r==2){
-                    $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                    ans();
+                    aite_par();
+                    result = "勝ち";
+                    win ++;
                 }else{
-                    $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
+                    ans();
+                    aite_cho();
+                    result = "引き分け";
+                    draw ++;
                 }
-                $("#gu_btn").css("display","block");
-                $("#cho_btn").css("display","block");
-                $("li").css("display","flex");
-                $("li").css("text-align","center");
-                $("#footer").html('<div class="btn" id="save">Save</div>');
-                $("#footer").append('<div class="btn" id="reset">Reset</div>');
-                $("#reset").on("click",function(){
-                    reset();
+                $("#judgement").html(result);
+                $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+                $("#next").on("click",function(){
+                    init();
+                    $("#reset").css("display","block");
+                    $("#save").css("display","block");
+                    $("#cho_btn").css("backgroundColor","#bdbdbd");
+                    $("#cho_btn").css("color","black");
+                    if(r==1){
+                        $("#aite_gu_btn").css("backgroundColor","#bdbdbd");
+                    }else if(r==2){
+                        $("#aite_par_btn").css("backgroundColor","#bdbdbd");
+                    }else{
+                        $("#aite_cho_btn").css("backgroundColor","#bdbdbd");
+                    }
+                    $("#gu_btn").css("display","block");
+                    $("#cho_btn").css("display","block");
+                    $("li").css("display","flex");
+                    $("li").css("text-align","center");
+                    $("#footer").html('<div class="btn" id="save">Save</div>');
+                    $("#footer").append('<div class="btn" id="reset">Reset</div>');
+                    $("#reset").on("click",function(){
+                        reset();
+                    });
+                    $("#save").on("click",function(){
+                        let value = {
+                            "win" : win,
+                            "lose" : lose,
+                            "draw" : draw
+                        };
+                        let v = JSON.stringify(value);
+                        console.log(v);
+                        localStorage.setItem("victory",v);
+                        alert("保存しました");
+                    });
                 });
-                $("#save").on("click",function(){
-                    let value = {
-                        "win" : win,
-                        "lose" : lose,
-                        "draw" : draw
-                    };
-                    let v = JSON.stringify(value);
-                    console.log(v);
-                    localStorage.setItem("victory",v);
-                    alert("保存しました");
-                });
-            });
+            }else{
+                alert("連打しないでください");
+            }
         });
 
         
