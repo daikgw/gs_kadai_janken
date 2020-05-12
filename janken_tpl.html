@@ -11,14 +11,12 @@
 </head>
 
 <body>
-<!-- 残課題として、PC単位でのフォントsizeが調整できていないこと
-永久ループ処理みたいになったところをどうするかは検討の価値あり -->
-
+<!-- 残課題として、PC単位でのフォントsizeが調整できていないこと -->
+<!-- 永久ループ処理みたいになったところをどうするかは検討の価値あり -->
     <header>
         <h1>じゃんけん</h1>
         <p id="win_lose"></p>
     </header>
-
     <main>
         <div id="field">
             <ul id="me">
@@ -37,88 +35,54 @@
 
     <footer id="footer">
         <div class="btn" id="save">Save</div>
-        <div id="next">footer@janken.co.jp</div>
         <div class="btn" id="reset">Reset</div>        
     </footer>
 
     <script>
-        // 初期設定の画面レイアウト
-        function init(){
-            // $("#gu_btn").css("display","block");
-            // $("#par_btn").css("display","block");
-            // $("#cho_btn").css("display","block");
-            $("#aite").css("display","none");
-            $("#reset").css("display","none");
-            $("#save").css("display","none");
-            $(".me").css("width","22.5vw");
-            $(".me").css("height","22.5vw");
-            $(".aite").css("width","22.5vw");
-            $(".aite").css("height","22.5vw");
-            $(".aite").css("color","black");
-            $("#judgement").css("display","none");
-            $("#next").html("footer@janken.co.jp")
-            $("#next").off("click");
-            $(".me").css("backgroundColor","#bdbdbd");
-            $(".aite").css("backgroundColor","#bdbdbd");
-            g();
-            c();
-            p();
-        }
+        // 初期定義
+        let result = "";
+        let win = 0;
+        let lose = 0;
+        let draw = 0;
 
-         // 画面表示を定義する
+        // 結果画面におけるレイアウト
         function ans(){
             $("#field").css("display","flex");
             $("#aite").css("display","flex");
+            $("#footer").html('<div class="btn" id="next">Next</div>');
+            $("#next").on("click");
         }
+        // 相手の出手を選んだ後の処理
         function aite_gu(){
             $("#aite_gu_btn").css("backgroundColor","rgb(238, 163, 188)");
             $("#aite_gu_btn").css("color","white");
             $("#aite_gu_btn").css("fontWeight","bold");
-            // 検証記述
             $("#aite_par_btn").css("display","none");
             $("#aite_cho_btn").css("display","none");
-
             $("#judgement").css("display","block");
-            // サイズ指定方法について知りたい
-            // $("#judgement").css("fontSize","50");
         }
         function aite_par(){
             $("#aite_par_btn").css("backgroundColor","rgb(238, 163, 188)");
             $("#aite_par_btn").css("color","white");
             $("#aite_par_btn").css("fontWeight","bold");
-            // 検証記述
             $("#aite_gu_btn").css("display","none");
             $("#aite_cho_btn").css("display","none");
-
             $("#judgement").css("display","block");
         }
         function aite_cho(){
             $("#aite_cho_btn").css("backgroundColor","rgb(238, 163, 188)");
             $("#aite_cho_btn").css("color","white");
             $("#aite_cho_btn").css("fontWeight","bold");
-            // 検証記述
             $("#aite_par_btn").css("display","none");
             $("#aite_gu_btn").css("display","none");
-
             $("#judgement").css("display","block");
         }
-    
-    //ホバーオフにする記載
+        // ホバーアウトについての処理
         function hover_off(){
             $("#gu_btn").off('mouseenter mouseleave');
             $("#par_btn").off('mouseenter mouseleave');
             $("#cho_btn").off('mouseenter mouseleave');
         }
-
-    // リセット処理について記載
-        function reset(){
-            init();
-            win = 0;
-            lose = 0;
-            draw = 0;
-            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
-        }
-    // レイアウト調整（最終調整）
         function g(){
         $("#gu_btn").hover(function(){
                     // over
@@ -155,27 +119,41 @@
                 }
             );
         }
-        
-        // 初期設定 
-        init()
-        let result = "";
-        let win = 0;
-        let lose = 0;
-        let draw = 0;
-
-        // グーに関する記載
-        let a = 
-            $("#gu_btn").on("click",function(){
+        // 初期処理
+        function init(){
+            $("#aite").css("display","none");
+            $(".me").css("width","22.5vw");
+            $(".me").css("height","22.5vw");
+            $(".aite").css("width","22.5vw");
+            $(".aite").css("height","22.5vw");
+            $(".aite").css("color","black");
+            $(".me").css("backgroundColor","#bdbdbd");
+            $(".aite").css("backgroundColor","#bdbdbd");
+            $("#judgement").css("display","none");
             $("#reset").css("display","none");
             $("#save").css("display","none");
+            $("#next").empty();
+            $("#next").off("click");
+            g();
+            c();
+            p();
+        }
+        // リセット処理について記載
+        function reset(){
+            init();
+            win = 0;
+            lose = 0;
+            draw = 0;
+            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+        }
+        // 以下、処理をかく 
+        init()
+        // グーに関する記載
+        $("#gu_btn").on("click",function(){
             $("#gu_btn").css("backgroundColor","#0066CC");
             $("#par_btn").css("display","none");
             $("#cho_btn").css("display","none");
             hover_off();
-            // 検証用
-            // $("#gu_btn").off("click");
-            $("#next").on("click");
-
             const r = Math.ceil(Math.random()*3);
             if(r==1){
                 ans();
@@ -195,8 +173,6 @@
             }
             $("#judgement").html(result);
             $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
-            $("#next").html("Next");
-
             $("#next").on("click",function(){
                 init();
                 $("#reset").css("display","block");
@@ -214,13 +190,24 @@
                 $("#cho_btn").css("display","block");
                 $("li").css("display","flex");
                 $("li").css("text-align","center");
-            });
-            // resetボタンの記載
-            $("#reset").on("click",function(){
-                reset();
+                $("#footer").html('<div class="btn" id="save">Save</div>');
+                $("#footer").append('<div class="btn" id="reset">Reset</div>');
+                $("#reset").on("click",function(){
+                    reset();
+                });
+                $("#save").on("click",function(){
+                    let value = {
+                        "win" : win,
+                        "lose" : lose,
+                        "draw" : draw
+                    };
+                    let v = JSON.stringify(value);
+                    console.log(v);
+                    localStorage.setItem("victory",v);
+                    alert("保存しました");
+                });
             });
         });
-
         // パーに関する記載
          $("#par_btn").on("click",function(){
             $("#reset").css("display","none");
@@ -229,10 +216,6 @@
             $("#gu_btn").css("display","none");
             $("#cho_btn").css("display","none");
             hover_off();
-            // $("#gu_btn").off("click");
-            // $("#cho_btn").off("click");
-            $("#next").on("click");
-
             const r = Math.ceil(Math.random()*3);
             if(r==1){
                 ans();
@@ -252,8 +235,6 @@
             }
             $("#judgement").html(result);
             $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分")
-            $("#next").html("Next");
-
             $("#next").on("click",function(){
                 init();
                 $("#reset").css("display","block");
@@ -271,9 +252,22 @@
                 $("#gu_btn").css("display","block");
                 $("li").css("display","flex");
                 $("li").css("text-align","center");
-            });
-            $("#reset").on("click",function(){
-                reset();
+                $("#footer").html('<div class="btn" id="save">Save</div>');
+                $("#footer").append('<div class="btn" id="reset">Reset</div>');
+                $("#reset").on("click",function(){
+                    reset();
+                });
+                $("#save").on("click",function(){
+                    let value = {
+                        "win" : win,
+                        "lose" : lose,
+                        "draw" : draw
+                    };
+                    let v = JSON.stringify(value);
+                    console.log(v);
+                    localStorage.setItem("victory",v);
+                    alert("保存しました");
+                });
             });
         });
 
@@ -285,10 +279,6 @@
             $("#par_btn").css("display","none");
             $("#gu_btn").css("display","none");
             hover_off();
-            // $("#par_btn").off("click");
-            // $("#gu_btn").off("click");
-            $("#next").on("click");
-
             const r = Math.ceil(Math.random()*3);
             if(r==1){
                 ans();
@@ -308,8 +298,6 @@
             }
             $("#judgement").html(result);
             $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
-            $("#next").html("Next");
-
             $("#next").on("click",function(){
                 init();
                 $("#reset").css("display","block");
@@ -327,26 +315,26 @@
                 $("#cho_btn").css("display","block");
                 $("li").css("display","flex");
                 $("li").css("text-align","center");
+                $("#footer").html('<div class="btn" id="save">Save</div>');
+                $("#footer").append('<div class="btn" id="reset">Reset</div>');
+                $("#reset").on("click",function(){
+                    reset();
+                });
+                $("#save").on("click",function(){
+                    let value = {
+                        "win" : win,
+                        "lose" : lose,
+                        "draw" : draw
+                    };
+                    let v = JSON.stringify(value);
+                    console.log(v);
+                    localStorage.setItem("victory",v);
+                    alert("保存しました");
+                });
             });
-            $("#reset").on("click",function(){
-                reset(); 
-            });
-        });
-
-        $("#save").on("click",function(){
-                let value = {
-                    "win" : win,
-                    "lose" : lose,
-                    "draw" : draw
-                };
-                let v = JSON.stringify(value);
-                console.log(v);
-                localStorage.setItem("victory",v);
-                alert("保存しました");
         });
 
         
-   
     </script>
 </body>
 
