@@ -47,6 +47,10 @@ footer>div{
 
     font-size: 24px;
 } 
+.btn{
+    font-size: 32px;
+    font-weight: bold;
+}
 ul{
     width: 100%;
     margin-bottom: 20px;
