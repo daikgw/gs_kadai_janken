@@ -45,6 +45,7 @@
         let lose = 0;
         let draw = 0;
         let click =0;
+        let game =0;
 
         // 結果画面におけるレイアウト
         function ans(){
@@ -52,6 +53,7 @@
             $("#aite").css("display","flex");
             $("#footer").html('<div class="btn" id="next">Next</div>');
             $("#next").on("click");
+            game ++;
         }
         // 相手の出手を選んだ後の処理
         function aite_gu(){
@@ -146,7 +148,7 @@
             win = 0;
             lose = 0;
             draw = 0;
-            $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+            game =0;
         }
         // 以下、処理をかく 
         init()
@@ -176,7 +178,9 @@
                     win ++;
                 }
                 $("#judgement").html(result);
-                $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+                if (game>=2){
+                    $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+                }
                 $("#next").on("click",function(){
                     init();
                     $("#reset").css("display","block");
@@ -241,7 +245,9 @@
                     lose ++;
                 }
                 $("#judgement").html(result);
-                $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分")
+                if (game>=2){
+                    $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+                }
                 $("#next").on("click",function(){
                     init();
                     $("#reset").css("display","block");
@@ -307,7 +313,9 @@
                     draw ++;
                 }
                 $("#judgement").html(result);
-                $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+                if (game>=1){
+                    $("#win_lose").html(win+"勝"+lose+"敗"+draw+"分");
+                }
                 $("#next").on("click",function(){
                     init();
                     $("#reset").css("display","block");
